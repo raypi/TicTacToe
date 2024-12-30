@@ -3,12 +3,14 @@ let fields = [
     null,
     null,
     null,
-    'cross',
     null,
     null,
-    'circle',
+    null,
+    null,
     null,
 ]
+
+let currentPlayer = 'circle'; // Start mit "circle"
 
 function init(){
     renderPlayingField()
@@ -65,38 +67,48 @@ return svgHtml;
 }
 
 
-        // Spielfeld rendern
-        function renderPlayingField() {
-            const contentDiv = document.getElementById('content');
-            let tableHTML = '<table class="playing-field">';
-
-            for (let i = 0; i < 3; i++) {
-                tableHTML += '<tr>';
-                for (let j = 0; j < 3; j++) {
-                    const index = i * 3 + j;
-                    const fieldValue = fields[index];
-                    let cellContent = '';
-
-                    if (fieldValue === 'circle') {
-                        cellContent = generateSVGCircle();
-                    } else if (fieldValue === 'cross') {
-                        cellContent = generateSVGCross();
-                    }
-
-                    tableHTML += `<td onclick="handleCellClick(${index})">${cellContent}</td>`;
-                }
-                tableHTML += '</tr>';
-            }
-
-            tableHTML += '</table>';
-            contentDiv.innerHTML = tableHTML;
-        }
+// Spielfeld rendern
+function renderPlayingField() {
+    const contentDiv = document.getElementById('content');
+    let tableHTML = '<table class="playing-field">';
+        
+    for (let i = 0; i < 3; i++) {
+    tableHTML += '<tr>';
+    for (let j = 0; j < 3; j++) {
+    const index = i * 3 + j;
+    const fieldValue = fields[index];
+    let cellContent = '';
+        
+    if (fieldValue === 'circle') {
+    cellContent = generateSVGCircle();
+    } else if (fieldValue === 'cross') {
+    cellContent = generateSVGCross();
+    }
+        
+    tableHTML += `<td onclick="handleCellClick(${index})">${cellContent}</td>`;
+    }
+    tableHTML += '</tr>';
+}
+        
+    tableHTML += '</table>';
+    contentDiv.innerHTML = tableHTML;
+}
 
 function handleCellClick(index) {
     if (!fields[index]) {
-        fields[index] = 'circle'; // Setze hier 'circle' oder 'cross' je nach Spieler
-        renderPlayingField();
-    }
+    // Aktualisiere das Array mit dem aktuellen Spieler
+    fields[index] = currentPlayer;
+        
+    // Füge das entsprechende SVG direkt in das <td> ein
+    const cell = document.querySelectorAll('td')[index];
+    cell.innerHTML = currentPlayer === 'circle' ? generateSVGCircle() : generateSVGCross();
+        
+    // Entferne das onclick-Attribut
+    cell.removeAttribute('onclick');
+        
+    // Wechsle den Spieler
+    currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
+} 
 }
 
 

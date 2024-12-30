@@ -10,6 +10,7 @@ h1 {
     text-align: center;
 }
 
+
 #content {
     display: flex;
     justify-content: center;
@@ -32,6 +33,10 @@ h1 {
     vertical-align: middle;
     position: relative;
     cursor: pointer;
+}
+
+.playing-field td:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 
