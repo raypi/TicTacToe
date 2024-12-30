@@ -43,7 +43,7 @@ function renderPlayingField() {
     contentDiv.innerHTML = tableHTML;
 }
 
-// Beispielaufruf der Funktion
-document.addEventListener('DOMContentLoaded', () => {
-    renderPlayingField();
-});
+// // Beispielaufruf der Funktion
+// document.addEventListener('DOMContentLoaded', () => {
+//     renderPlayingField();
+// });
