@@ -23,32 +23,74 @@ function generateSVGCircle() {
 }
 
 
-function renderPlayingField() {
-    const contentDiv = document.getElementById('content');
-    let tableHTML = '<table class="playing-field">';
+function generateSVGCross() {
+    
+        const color = '#FFC000';
+    
+        const width = 70;
+    
+        const height = 70;
+    
+    
 
-    for (let i = 0; i < 3; i++) {
-        tableHTML += '<tr>';
-        for (let j = 0; j < 3; j++) {
-            const index = i * 3 + j;
-            const fieldValue = fields[index];
-            let cellContent = '';
 
-            if (fieldValue === 'circle') {
-                cellContent = generateSVGCircle();
-            } else if (fieldValue === 'cross') {
-                cellContent = '<div class="cross"></div>';
-            }
+        const svgHtml = `
 
-            tableHTML += `<td onclick="handleCellClick(${index})">${cellContent}</td>`;
-        }
-        tableHTML += '</tr>';
-    }
+          <svg width="${width}" height="${height}">
 
-    tableHTML += '</table>';
-    contentDiv.innerHTML = tableHTML;
+            <line x1="0" y1="0" x2="${width}" y2="${height}"
+
+              stroke="${color}" stroke-width="5">
+
+              <animate attributeName="x2" values="0; ${width}" dur="200ms" />
+
+              <animate attributeName="y2" values="0; ${height}" dur="200ms" />
+
+            </line>
+
+            <line x1="${width}" y1="0" x2="0" y2="${height}"
+
+              stroke="${color}" stroke-width="5">
+
+              <animate attributeName="x2" values="${width}; 0" dur="200ms" />
+
+              <animate attributeName="y2" values="0; ${height}" dur="200ms" />
+
+            </line>
+
+          </svg>
+
+        `;
+return svgHtml;
 }
 
+
+        // Spielfeld rendern
+        function renderPlayingField() {
+            const contentDiv = document.getElementById('content');
+            let tableHTML = '<table class="playing-field">';
+
+            for (let i = 0; i < 3; i++) {
+                tableHTML += '<tr>';
+                for (let j = 0; j < 3; j++) {
+                    const index = i * 3 + j;
+                    const fieldValue = fields[index];
+                    let cellContent = '';
+
+                    if (fieldValue === 'circle') {
+                        cellContent = generateSVGCircle();
+                    } else if (fieldValue === 'cross') {
+                        cellContent = generateSVGCross();
+                    }
+
+                    tableHTML += `<td onclick="handleCellClick(${index})">${cellContent}</td>`;
+                }
+                tableHTML += '</tr>';
+            }
+
+            tableHTML += '</table>';
+            contentDiv.innerHTML = tableHTML;
+        }
 
 function handleCellClick(index) {
     if (!fields[index]) {

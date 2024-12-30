@@ -35,42 +35,22 @@ h1 {
 }
 
 
-.cross::before, .cross::after {
-    content: '';
-    position: absolute;
-    width: 5px;
-    height: 80px;
-    background-color: red;
-    top: 10px;
-    left: 45px;
-}
-
-.cross::before {
-    transform: rotate(45deg);
-}
-
-.cross::after {
-    transform: rotate(-45deg);
-}
-
-@keyframes fillAndStrokeAnimation {
+@keyframes drawCircle {
     0% {
-        stroke-dasharray: 0, 188.4;  /* Anfangszustand für den Rand */
-        fill: transparent;           /* Anfangszustand für die Füllung (transparent) */
+        stroke-dasharray: 0, 188.4; /* Anfangszustand: kein Rand sichtbar */
     }
     100% {
-        stroke-dasharray: 188.4, 0;  /* Endzustand für den Rand (komplett sichtbar) */
-        fill: #00B0EF;                  /* Endzustand für die Füllung (blau) */
+        stroke-dasharray: 188.4, 0; /* Endzustand: kompletter Kreisrand sichtbar */
     }
 }
 
 .circle {
-    fill: transparent;
-    stroke: transparent; /* Farbe des Kreises */
-    stroke-width: 10;
-    stroke-dasharray: 0, 188.4; /* Anfangszustand (Kreis ist unsichtbar) */
-    stroke-linecap: round;
-    animation: fillAndStrokeAnimation 3s forwards; /* Animation läuft einmal und bleibt in der Endposition */
+    fill: transparent; /* Innerer Bereich bleibt transparent */
+    stroke: #00B0EF; /* Farbe des Kreises */
+    stroke-width: 5;
+    stroke-dasharray: 0, 188.4; /* Anfangszustand: Kreisrand unsichtbar */
+    stroke-linecap: round; /* Abgerundete Enden für den Rand */
+    animation: drawCircle 2s forwards; /* Animiert nur den Rand */
 }
 
 svg {
