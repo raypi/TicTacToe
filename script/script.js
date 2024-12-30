@@ -14,6 +14,15 @@ function init(){
     renderPlayingField()
 }
 
+function generateSVGCircle() {
+    return `
+        <svg viewBox="0 0 70 70">
+        <circle class="circle" cx="35" cy="35" r="30"></circle>
+    </svg>
+    `;
+}
+
+
 function renderPlayingField() {
     const contentDiv = document.getElementById('content');
     let tableHTML = '<table class="playing-field">';
@@ -26,7 +35,7 @@ function renderPlayingField() {
             let cellContent = '';
 
             if (fieldValue === 'circle') {
-                cellContent = '<div class="circle"></div>';
+                cellContent = generateSVGCircle();
             } else if (fieldValue === 'cross') {
                 cellContent = '<div class="cross"></div>';
             }
@@ -39,6 +48,15 @@ function renderPlayingField() {
     tableHTML += '</table>';
     contentDiv.innerHTML = tableHTML;
 }
+
+
+function handleCellClick(index) {
+    if (!fields[index]) {
+        fields[index] = 'circle'; // Setze hier 'circle' oder 'cross' je nach Spieler
+        renderPlayingField();
+    }
+}
+
 
 // // Beispielaufruf der Funktion
 // document.addEventListener('DOMContentLoaded', () => {

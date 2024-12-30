@@ -4,10 +4,16 @@ body {
     color: white;
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+#content {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 50px;    
 }
 
 .playing-field {
@@ -28,13 +34,6 @@ body {
     cursor: pointer;
 }
 
-.circle {
-    width: 60px;
-    height: 60px;
-    border: 5px solid blue;
-    border-radius: 50%;
-    margin: auto;
-}
 
 .cross::before, .cross::after {
     content: '';
@@ -52,4 +51,29 @@ body {
 
 .cross::after {
     transform: rotate(-45deg);
+}
+
+@keyframes fillAndStrokeAnimation {
+    0% {
+        stroke-dasharray: 0, 188.4;  /* Anfangszustand für den Rand */
+        fill: transparent;           /* Anfangszustand für die Füllung (transparent) */
+    }
+    100% {
+        stroke-dasharray: 188.4, 0;  /* Endzustand für den Rand (komplett sichtbar) */
+        fill: #00B0EF;                  /* Endzustand für die Füllung (blau) */
+    }
+}
+
+.circle {
+    fill: transparent;
+    stroke: transparent; /* Farbe des Kreises */
+    stroke-width: 10;
+    stroke-dasharray: 0, 188.4; /* Anfangszustand (Kreis ist unsichtbar) */
+    stroke-linecap: round;
+    animation: fillAndStrokeAnimation 3s forwards; /* Animation läuft einmal und bleibt in der Endposition */
+}
+
+svg {
+    width: 70px;
+    height: 70px;
 }
