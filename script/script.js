@@ -3,10 +3,10 @@ let fields = [
     null,
     null,
     null,
+    'cross',
     null,
     null,
-    null,
-    null,
+    'circle',
     null,
 ]
 
@@ -14,32 +14,29 @@ function init(){
     renderPlayingField()
 }
 
-// Funktion zum Rendern des Spielfelds
 function renderPlayingField() {
-    // Referenz auf den DIV-Container mit der id="content"
     const contentDiv = document.getElementById('content');
-
-    // HTML-Code für die Tabelle erstellen
     let tableHTML = '<table class="playing-field">';
 
-    for (let row = 0; row < 3; row++) {
+    for (let i = 0; i < 3; i++) {
         tableHTML += '<tr>';
-        for (let col = 0; col < 3; col++) {
-            // Berechnung des Index im Array "fields"
-            const index = row * 3 + col;
+        for (let j = 0; j < 3; j++) {
+            const index = i * 3 + j;
+            const fieldValue = fields[index];
+            let cellContent = '';
 
-            // Inhalt basierend auf dem Zustand des Arrays
-            const cellContent = fields[index] === 'O' ? 'O' : (fields[index] === 'X' ? 'X' : '');
+            if (fieldValue === 'circle') {
+                cellContent = '<div class="circle"></div>';
+            } else if (fieldValue === 'cross') {
+                cellContent = '<div class="cross"></div>';
+            }
 
-            // HTML für die Zelle hinzufügen
-            tableHTML += `<td>${cellContent}</td>`;
+            tableHTML += `<td onclick="handleCellClick(${index})">${cellContent}</td>`;
         }
         tableHTML += '</tr>';
     }
 
     tableHTML += '</table>';
-
-    // Tabelle in den Container rendern
     contentDiv.innerHTML = tableHTML;
 }
 

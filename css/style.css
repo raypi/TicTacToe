@@ -1,22 +1,42 @@
 .playing-field {
     border-collapse: collapse;
+    margin: 20px auto;
     width: 300px;
     height: 300px;
-    margin: 0 auto;
-    font-size: 24px;
-    text-align: center;
 }
 
 .playing-field td {
-    border: 1px solid #000;
+    border: 1px solid black;
     width: 100px;
     height: 100px;
-    line-height: 100px; /* Zentriert den Text vertikal */
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
     cursor: pointer;
-    background-color: #f9f9f9;
-    user-select: none; /* Verhindert Textmarkierung */
 }
 
-.playing-field td:hover {
-    background-color: #e0e0e0; /* Hover-Effekt für Felder */
+.circle {
+    width: 60px;
+    height: 60px;
+    border: 5px solid blue;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.cross::before, .cross::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 80px;
+    background-color: red;
+    top: 10px;
+    left: 45px;
+}
+
+.cross::before {
+    transform: rotate(45deg);
+}
+
+.cross::after {
+    transform: rotate(-45deg);
 }
