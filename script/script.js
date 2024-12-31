@@ -89,6 +89,7 @@ function handleCellClick(index) {
                 // Zeige die `alert`-Meldung nach einer kurzen Verzögerung
                 setTimeout(() => {
                     alert(`${winner.player} hat gewonnen!`);
+                    document.getElementById('restart').classList.remove('hidden'); // Klasse "hidden" entfernen
                 }, 1200); // Zeit, die die Linie zum Zeichnen benötigt
             } else {
                 // Wechsle zum nächsten Spieler, wenn kein Gewinner
@@ -168,6 +169,7 @@ function restartGame() {
      // Entferne alle SVG-Linien
      const svgElements = document.querySelectorAll('body > svg');
      svgElements.forEach(svg => svg.remove());
-     
+
     renderPlayingField();
+    document.getElementById('restart').classList.add('hidden'); // Klasse "hidden" hinzufügen
 }
