@@ -71,22 +71,33 @@ function renderPlayingField() {
 
 function handleCellClick(index) {
     if (!fields[index]) {
+        // Setze das aktuelle Feld
         fields[index] = currentPlayer;
 
+        // Zeichne den aktuellen Spieler in die Zelle
         const cell = document.querySelectorAll('td')[index];
         cell.innerHTML = currentPlayer === 'circle' ? generateSVGCircle() : generateSVGCross();
         cell.removeAttribute('onclick');
 
-        // Prüfe nach jedem Zug auf einen Gewinner
-        const winner = checkWinner();
-        if (winner) {
-            drawWinningLine(winner.line);
-            alert(`${winner.player} hat gewonnen!`);
-        } else {
-            currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
-        }
+        // Überprüfe nach einem kurzen Timeout, ob jemand gewonnen hat
+        setTimeout(() => {
+            const winner = checkWinner();
+            if (winner) {
+                // Zeichne die Linie, falls es einen Gewinner gibt
+                drawWinningLine(winner.line);
+
+                // Zeige die `alert`-Meldung nach einer kurzen Verzögerung
+                setTimeout(() => {
+                    alert(`${winner.player} hat gewonnen!`);
+                }, 1200); // Zeit, die die Linie zum Zeichnen benötigt
+            } else {
+                // Wechsle zum nächsten Spieler, wenn kein Gewinner
+                currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
+            }
+        }, 800); // Warte, bis die Zelle gezeichnet ist
     }
 }
+
 
 // Gewinnkombinationen
 const winningCombinations = [
