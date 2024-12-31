@@ -153,3 +153,21 @@ function drawWinningLine(line) {
     document.body.appendChild(svg);
 }
 
+function restartGame() {
+    fields = [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+    ];
+     // Entferne alle SVG-Linien
+     const svgElements = document.querySelectorAll('body > svg');
+     svgElements.forEach(svg => svg.remove());
+     
+    renderPlayingField();
+}
