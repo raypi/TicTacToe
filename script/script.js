@@ -82,15 +82,14 @@ function handleCellClick(index) {
         // Überprüfe nach einem kurzen Timeout, ob jemand gewonnen hat
         setTimeout(() => {
             const winner = checkWinner();
-            if (winner) {
-                // Zeichne die Linie, falls es einen Gewinner gibt
-                drawWinningLine(winner.line);
-
-                // Zeige die `alert`-Meldung nach einer kurzen Verzögerung
-                setTimeout(() => {
-                    alert(`${winner.player} hat gewonnen!`);
-                    document.getElementById('restart').classList.remove('hidden'); // Klasse "hidden" entfernen
-                }, 1200); // Zeit, die die Linie zum Zeichnen benötigt
+if (winner) {
+    drawWinningLine(winner.line);
+    setTimeout(() => {
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = `${winner.player} hat gewonnen!`; // Nachricht einfügen
+        messageDiv.classList.remove('hidden'); // Sichtbar machen
+        document.getElementById('restart').classList.remove('hidden'); // Restart-Button sichtbar machen
+    }, 1200); // Zeit für das Zeichnen der Linie
             } else {
                 // Wechsle zum nächsten Spieler, wenn kein Gewinner
                 currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
