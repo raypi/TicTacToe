@@ -29,6 +29,9 @@ button {
     align-items: center;
 }
 
+.hidden {
+    display: none;
+}
 
 #content {
     display: flex;
